@@ -11,13 +11,14 @@ using namespace std;
 class TwentyFourPointsSolver
 {
 private:
-	char s[4][100];
+	char s[4][100];		//用来输出结果
 	double num[4];
 	int visit[4];
 
 public:
 	bool dfs(int step)
 	{
+		//递归结束，判断是否得到24
 		if (step == 3)
 		{
 			for (int i = 0; i < 4; i++)
@@ -33,6 +34,8 @@ public:
 			}
 			return false;
 		}
+
+		//枚举第i张a和第j张b，选择没有用过的两张，算出结果c放入a中重复利用数组
 		for (int i = 0; i < 4; i++)
 		{
 			if (this->visit[i] != 0)
@@ -86,6 +89,11 @@ public:
 				{
 					return true;
 				}
+
+				/*
+				此处还可以枚举更多的运算方式，如 a % b, pow(a, b)等 
+				*/
+
 				num[i] = a;
 				
 				visit[j] = 0;
@@ -119,6 +127,7 @@ public:
 
 int main()
 {
+	//有点LeetCode风格
 	TwentyFourPointsSolver().solve(vector<int>{1,5,5,5});
 	cin.get();
 }
